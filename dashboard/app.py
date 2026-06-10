@@ -1,10 +1,15 @@
 from __future__ import annotations
 
-from pathlib import Path
 import json
+from pathlib import Path
+import sys
 
 import pandas as pd
 import streamlit as st
+
+ROOT = Path(__file__).resolve().parents[1]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
 
 from hr_predictor.config import (
     DEFAULT_BACKTEST_FILE,
@@ -18,9 +23,6 @@ from hr_predictor.config import (
 from hr_predictor.runner import PipelineRunner, read_recent_log
 from hr_predictor.strategy import BEST_TOP10, MODEL_STRATEGIES, resolve_model_strategy
 from hr_predictor.favorites import favorite_three_from_predictions
-
-
-ROOT = Path(__file__).resolve().parents[1]
 
 st.set_page_config(page_title="MLB HR Predictor", layout="wide")
 st.title("MLB Daily Home Run Predictor")
